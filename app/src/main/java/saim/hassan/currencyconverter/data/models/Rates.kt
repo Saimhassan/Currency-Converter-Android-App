@@ -1,8 +1,9 @@
 package saim.hassan.currencyconverter.data.models
-
+import com.google.gson.annotations.SerializedName
 data class Rates(
     val AUD: Double,
     val BGN: Double,
+    val EUR: Double,
     val BRL: Double,
     val CAD: Double,
     val CHF: Double,
