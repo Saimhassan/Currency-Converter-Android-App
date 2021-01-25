@@ -4,9 +4,13 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import kotlinx.coroutines.CoroutineDispatcher
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import saim.hassan.currencyconverter.CurrencyApi
+import saim.hassan.currencyconverter.main.DefaultMainRepository
+import saim.hassan.currencyconverter.main.MainRepository
+import saim.hassan.currencyconverter.util.DispatcherProvider
 import javax.inject.Singleton
 
 private const val BASE_URL = "https://api.exchangeratesapi.io/"
@@ -19,4 +23,21 @@ object AppModule {
    fun provideCurrencyApi():CurrencyApi = Retrofit.Builder()
        .baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build()
        .create(CurrencyApi::class.java)
+
+    @Singleton
+    @Provides
+    fun provideMainRepository(api: CurrencyApi): MainRepository = DefaultMainRepository(api)
+
+    @Singleton
+    @Provides
+    fun provideDispatchers(): DispatcherProvider = object : DispatcherProvider{
+        override val main: CoroutineDispatcher
+            get() = TODO("Not yet implemented")
+        override val io: CoroutineDispatcher
+            get() = TODO("Not yet implemented")
+        override val default: CoroutineDispatcher
+            get() = TODO("Not yet implemented")
+        override val unconfined: CoroutineDispatcher
+            get() = TODO("Not yet implemented")
+    }
 }
