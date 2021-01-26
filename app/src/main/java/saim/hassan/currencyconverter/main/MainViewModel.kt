@@ -87,6 +87,7 @@ class MainViewModel @ViewModelInject constructor(
         "TRY" -> rates.TRY
         "USD" -> rates.USD
         "ZAR" ->  rates.ZAR
+        "PKR" -> rates.PKR
         else -> null
     }
 }
